@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Shopping</string>
+    <string name="IB">Unicuellos</string>
+    <string name="Botton4">Email:</string>
+    <string name="Botton5">Password:</string>
+    <string name="button">L O G I N</string>
+    <string name="botton2">R E G I S T R A R S E</string>
+    <string name="botton5">R E G I S T R A R</string>
+    <string name="botton6">C O N T I N U A R</string>
+    <string name="botton7">R E G I S T R A R</string>
+    <string name="botton8">C O N T I N U A R</string>
+    <string name="etProducto">Nombre del Producto:</string>
+    <string name="etReferences">Referencia:</string>
+    <string name="etCategory">Categoria:</string>
+    <string name="etPrecio">Precio:</string>
+    <string name="etDecripcion">Descripción:</string>
+    <string name="etName">Name:</string>
+    <string name="etIdentif">ID:</string>
+    <string name="etadress">Adress:</string>
+    <string name="etEmail">Email:</string>
+    <string name="etDescription">Description</string>
+    <string name="button4">Continuar</string>
+    <string name="registrar_usuarios">REGISTRAR USUARIOS</string>
+    <string name="tel">Phone Number:</string>
+    <string name="email">Email:</string>
+    <string name="country">country:</string>
+    <string name="password">password:</string>
+
+    <string name="agregar_productos">AGREGAR PRODUCTOS</string>
+
+</resources>
