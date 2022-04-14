@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aprendiendo.android.Models.Product;
+import com.aprendiendo.android.R;
 import com.aprendiendo.android.databinding.CardItemBinding;
+import com.bumptech.glide.Glide;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -43,10 +45,51 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             Product product = productArray.get(position);
             holder.itemBinding.tvName.setText(product.getName());
             holder.itemBinding.tvPrice.setText(String.valueOf(product.getPrice()));
-            holder.itemBinding.tvRating.setText(String.valueOf(product.getRating()));
-            String url = product.getImg_url();
-            Drawable d = LoadImageFromWebOperations(url);
-            holder.itemBinding.ivPicture.setImageDrawable(d);
+            Glide.with(where).load(product.getImg_url()).into(holder.itemBinding.ivPicture);
+            Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+            ;
+
+            // rating starts stuff here*******
+            switch (product.getRating())
+
+            {
+
+                case 1:
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar2);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar3);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar4);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
+                break;
+                case 2:
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar3);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar4);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
+                    break;
+                case 3:
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar4);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
+                    break;
+                case 4:
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar4);
+                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
+                    break;
+                case 5:
+                   Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar4);
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar5);
+                    break;
+            }
 
 
     }
@@ -64,14 +107,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+
+
 }
 

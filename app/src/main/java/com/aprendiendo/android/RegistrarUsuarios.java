@@ -20,6 +20,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.aprendiendo.android.Services.ipConfig.ip;
+
 public class RegistrarUsuarios extends AppCompatActivity {
 
     private Retrofit retrofit;
@@ -98,7 +100,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
             //metodo para agregar un usuario
         public void CreateUsers(){
 
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.1.110:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
             CreateUserService service = retrofit.create(CreateUserService.class);
             User newUser = new User();
             newUser.setName(etName.getText().toString());

@@ -22,46 +22,51 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.aprendiendo.android.Services.ipConfig;
+
+import static com.aprendiendo.android.Services.ipConfig.ip;
 
 public class Inicio extends AppCompatActivity {
+
     private Retrofit retrofit;
     private ActivityInicioBinding inicioBinding;
-    ArrayList<Product> productArrayList;
+
     ProductAdapter  productAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       inicioBinding = ActivityInicioBinding.inflate(getLayoutInflater());
+        inicioBinding = ActivityInicioBinding.inflate(getLayoutInflater());
         View view = inicioBinding.getRoot();
         setContentView(view);
+        GetProducts();
 
-        productArrayList = new ArrayList<>();
-        productAdapter = new ProductAdapter(this,productArrayList);
-        inicioBinding.rvProduct.setHasFixedSize(true);
-        inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(this));
-        inicioBinding.rvProduct.setAdapter(productAdapter);
+
+
     }
 
     public void GetProducts()
     {
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.1.110:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
         GetAllProducts service = retrofit.create(GetAllProducts.class);
         Product newProduct = new Product();
         Call<ArrayList<Product>> myProducts = service.GetProducts();
         myProducts.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                if(response.isSuccessful())
+                if (!response.isSuccessful())
                 {
-                    ArrayList<Product> ArrayProducts = response.body();
 
 
+                   return;
                 }else {
-                    Toast.makeText(getApplicationContext(),"there is a problem! ", Toast.LENGTH_SHORT).show();
+                    ArrayList<Product> arrayProducts = response.body();
+                    productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
+                    inicioBinding.rvProduct.setHasFixedSize(true);
+                    inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    inicioBinding.rvProduct.setAdapter(productAdapter);
                 }
+
             }
-
-
             @Override
             public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"there is a problem in conection:"+t.getMessage(), Toast.LENGTH_SHORT).show();

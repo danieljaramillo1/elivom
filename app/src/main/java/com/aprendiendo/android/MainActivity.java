@@ -20,6 +20,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.aprendiendo.android.Services.ipConfig.ip;
+
 public class MainActivity extends AppCompatActivity  {
     private Retrofit retrofit;
     EditText etMail, etPass;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity  {
 
         public void LogUser()
         {
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.1.110:8080/").addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
             LogUser service = retrofit.create(LogUser.class);
             UserLogin userLogging = new UserLogin();
             userLogging.setEmail(etMail.getText().toString());
