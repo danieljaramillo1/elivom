@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etPass"
@@ -70,10 +70,23 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMail"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.017" />
+
+    <RadioButton
+        android:id="@+id/rbSaveSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:hint="No cerrar sesion"
+        app:layout_constraintBottom_toTopOf="@+id/btLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPass"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btLogin"
@@ -82,7 +95,6 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/botton_rounder"
         android:hint="@string/button"
-        android:onClick="Login"
         app:layout_constraintBottom_toTopOf="@+id/btRegisterUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"

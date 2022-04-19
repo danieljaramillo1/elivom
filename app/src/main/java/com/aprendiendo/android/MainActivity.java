@@ -2,17 +2,18 @@ package com.aprendiendo.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.aprendiendo.android.Models.AnswerBoolean;
+import com.aprendiendo.android.Models.User;
 import com.aprendiendo.android.Models.UserLogin;
-import com.aprendiendo.android.Services.CreateUserService;
 import com.aprendiendo.android.Services.LogUser;
+import com.aprendiendo.android.databinding.ActivityMainBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,16 +24,65 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.aprendiendo.android.Services.ipConfig.ip;
 
 public class MainActivity extends AppCompatActivity  {
+
+    User usuario;
     private Retrofit retrofit;
-    EditText etMail, etPass;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    private ActivityMainBinding binding;
+    String llave = "sesion";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        etMail = findViewById(R.id.etMail);
-        etPass = findViewById(R.id.etPass);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        initElements();
+        usuario = new User();
+
+        if (checkSession())
+        {
+            Intent inte = new Intent(getApplicationContext(), Inicio.class);
+            startActivity(inte);
+
+        }else
+        {
+            String mesage = "inicia sesion";
+            Toast.makeText(this,mesage,Toast.LENGTH_SHORT).show();
+        }
 
 
+
+        binding.btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LogUser();
+            }
+        });
+
+
+
+
+    }
+       // incializo Elementos de la shared
+    private void initElements()
+    {
+
+        preferences = getSharedPreferences("sesiones",Context.MODE_PRIVATE);
+        editor = preferences.edit();
+    }
+    //edita el shared preferences
+    private void saveSession(boolean checked)
+    {
+        editor.putBoolean(llave,checked);
+        editor.apply();
+    }
+
+    private boolean checkSession()
+    {
+        return this.preferences.getBoolean(llave,false);
     }
 
     //Metodo boton Registrarse
@@ -41,49 +91,47 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(registrarse);
     }
 
-    // Metodo boton Loggin provicional
-    public void Login (View view){
-                LogUser();
 
-    }
+
 
 
 
         public void LogUser()
         {
+
             retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
             LogUser service = retrofit.create(LogUser.class);
             UserLogin userLogging = new UserLogin();
-            userLogging.setEmail(etMail.getText().toString());
-            userLogging.setPassword(etPass.getText().toString());
-            Call<AnswerBoolean> log = service.LogUser(userLogging);
-            log.enqueue(new Callback<AnswerBoolean>() {
+            userLogging.setEmail(binding.etMail.getText().toString());
+            userLogging.setPassword(binding.etPass.getText().toString());
+            Call<User> log = service.LogUser(userLogging);
+
+            log.enqueue(new Callback<User>() {
                 @Override
-                public void onResponse(Call<AnswerBoolean> call, Response<AnswerBoolean> response) {
+                public void onResponse(Call<User> call, Response<User> response) {
                     if(response.isSuccessful())
                     {
-                        Log.d("...TAG...", "onResponse: "+ response.body().getRes());
-
-
-                        if(response.body().getRes())
+                        if(response.body()== null)
                         {
-                            Toast.makeText(getApplicationContext(),"ok!",Toast.LENGTH_LONG).show();
-                            Intent login = new Intent(getApplicationContext(), Inicio.class);
-                            startActivity(login);
+                            Toast.makeText(getApplicationContext(),"mal",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(),"Wrong email or password",Toast.LENGTH_LONG).show();
+                            User user = response.body();
+                            Toast.makeText(getApplicationContext(),"bien",Toast.LENGTH_SHORT).show();
+                            saveSession(binding.rbSaveSession.isChecked());
+                            Intent inte = new Intent(getApplicationContext(), Inicio.class);
+                            inte.putExtra("name", user.getName());
+                            startActivity(inte);
+
                         }
                     }
-                    else
-                    {
-                        Toast.makeText(getApplicationContext(),"sorry there is a problem!",Toast.LENGTH_LONG).show();
-                    }
+
+
                 }
 
                 @Override
-                public void onFailure(Call<AnswerBoolean> call, Throwable t) {
+                public void onFailure(Call<User> call, Throwable t) {
                     Toast.makeText(getApplicationContext(),"Connection problem:"+t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });

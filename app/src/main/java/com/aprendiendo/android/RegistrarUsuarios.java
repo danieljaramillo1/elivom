@@ -14,6 +14,8 @@ import java.lang.*;
 
 import com.aprendiendo.android.Models.User;
 import com.aprendiendo.android.Services.CreateUserService;
+import com.aprendiendo.android.databinding.ActivityRegistrarUsuariosBinding;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,27 +27,18 @@ import static com.aprendiendo.android.Services.ipConfig.ip;
 public class RegistrarUsuarios extends AppCompatActivity {
 
     private Retrofit retrofit;
-    EditText etName;
-    EditText etEmail;
-    EditText etAdress;
-    EditText etPassword;
-    TextView tvtest;
-    Button btCreate;
+    private ActivityRegistrarUsuariosBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar_usuarios);
+        binding = ActivityRegistrarUsuariosBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-
-        //conecto con vista
-        etName = findViewById(R.id.etName);
-        etEmail = findViewById(R.id.etEmail);
-        etAdress = findViewById(R.id.etAdress);
-        etPassword = findViewById(R.id.etPassword);
-        tvtest = findViewById(R.id.textView3);
 
     }
     //metodo para validar nuevo usuario
@@ -53,10 +46,10 @@ public class RegistrarUsuarios extends AppCompatActivity {
         {
             //Paso a Strings
             int i;
-            String name = etName.getText().toString();
-            String email = etEmail.getText().toString();
-            String adress = etAdress.getText().toString();
-            String password = etPassword.getText().toString();
+            String name = binding.etName.getText().toString();
+            String email = binding.etEmail.getText().toString();
+            String adress = binding.etAdress.getText().toString();
+            String password = binding.etPassword.getText().toString();
 
             if(email.isEmpty()||password.isEmpty()||name.isEmpty()||adress.isEmpty())
             {
@@ -66,7 +59,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
             else if(!contieneSoloLetras(name))
             {
                     Toast.makeText(this,"Only aphabetical here please!try Again", Toast.LENGTH_SHORT).show();
-                    etName.setText("");
+                    binding.etName.setText("");
             }
 
             else if(password.length()<8)
@@ -103,10 +96,10 @@ public class RegistrarUsuarios extends AppCompatActivity {
             retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
             CreateUserService service = retrofit.create(CreateUserService.class);
             User newUser = new User();
-            newUser.setName(etName.getText().toString());
-            newUser.setEmail(etEmail.getText().toString());
-            newUser.setAdress(etAdress.getText().toString());
-            newUser.setPassword(etPassword.getText().toString());
+            newUser.setName(binding.etName.getText().toString());
+            newUser.setEmail(binding.etEmail.getText().toString());
+            newUser.setAdress(binding.etAdress.getText().toString());
+            newUser.setPassword(binding.etPassword.getText().toString());
             Call<User> create = service.CreateUser(newUser);
             create.enqueue(new Callback<User>() {
                 @Override

@@ -8,6 +8,17 @@ public class User {
     public String email;
     public String adress;
     public String password;
+    public int state;
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+
 
 
 

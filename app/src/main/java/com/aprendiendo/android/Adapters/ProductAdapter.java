@@ -47,7 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             holder.itemBinding.tvPrice.setText(String.valueOf(product.getPrice()));
             Glide.with(where).load(product.getImg_url()).into(holder.itemBinding.ivPicture);
             Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
-            ;
+
 
             // rating starts stuff here*******
             switch (product.getRating())

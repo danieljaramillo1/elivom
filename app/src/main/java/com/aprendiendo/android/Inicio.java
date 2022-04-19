@@ -3,9 +3,13 @@ package com.aprendiendo.android;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.aprendiendo.android.Adapters.ProductAdapter;
@@ -30,8 +34,14 @@ public class Inicio extends AppCompatActivity {
 
     private Retrofit retrofit;
     private ActivityInicioBinding inicioBinding;
-
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    String llave = "sesion";
     ProductAdapter  productAdapter;
+    Intent get = getIntent();
+    String name = get.getStringExtra("name");
+    ArrayList<String> categories;
+    ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +49,36 @@ public class Inicio extends AppCompatActivity {
         View view = inicioBinding.getRoot();
         setContentView(view);
         GetProducts();
+        initElements();
+
+
+
+        inicioBinding.btCloseSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putBoolean(llave,false);
+                editor.apply();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+            }
+        });
 
 
 
     }
+    // inicializo los shared
+    private void initElements()
+    {
+        preferences = getSharedPreferences("sesiones",Context.MODE_PRIVATE);
+        editor = preferences.edit();
+        categories = new ArrayList<>();
+        categories.add("Hamburger");
+        categories.add("hotdogs");
+        categories.add("drinks");
+
+    }
+
+
 
     public void GetProducts()
     {
@@ -61,6 +97,8 @@ public class Inicio extends AppCompatActivity {
                 }else {
                     ArrayList<Product> arrayProducts = response.body();
                     productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
+                    inicioBinding.tvUserName.setText("Welcome, "+name+".");
+
                     inicioBinding.rvProduct.setHasFixedSize(true);
                     inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     inicioBinding.rvProduct.setAdapter(productAdapter);
