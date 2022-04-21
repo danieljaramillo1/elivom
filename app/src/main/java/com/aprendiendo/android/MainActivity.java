@@ -113,15 +113,19 @@ public class MainActivity extends AppCompatActivity  {
                     {
                         if(response.body()== null)
                         {
-                            Toast.makeText(getApplicationContext(),"mal",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Error en email o constraseña",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             User user = response.body();
-                            Toast.makeText(getApplicationContext(),"bien",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),user.adress,Toast.LENGTH_SHORT).show();
+                            // dejo logeado al usuario si esta checkeado el radiobutton
                             saveSession(binding.rbSaveSession.isChecked());
+                            //paso a activity inicio y le paso la direccion.
                             Intent inte = new Intent(getApplicationContext(), Inicio.class);
-                            inte.putExtra("name", user.getName());
+                            String userAdress = user.getAdress();
+                            String adress = "direccion";
+                            inte.putExtra(adress,userAdress);
                             startActivity(inte);
 
                         }

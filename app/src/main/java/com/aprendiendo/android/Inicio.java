@@ -38,8 +38,8 @@ public class Inicio extends AppCompatActivity {
     SharedPreferences.Editor editor;
     String llave = "sesion";
     ProductAdapter  productAdapter;
-    //Intent get = getIntent();
-    //String name = get.getStringExtra("name");
+    String userAdress;
+
     ArrayList<String> categories;
     ArrayAdapter adapter;
     @Override
@@ -50,7 +50,8 @@ public class Inicio extends AppCompatActivity {
         setContentView(view);
         GetProducts();
         initElements();
-
+        Intent intent = getIntent();
+         userAdress = intent.getStringExtra("direccion");
 
 
         inicioBinding.btCloseSesion.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +98,7 @@ public class Inicio extends AppCompatActivity {
                 }else {
                     ArrayList<Product> arrayProducts = response.body();
                     productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
-                    inicioBinding.tvUserName.setText("Welcome, "+".");
+                    inicioBinding.tvUserName.setText(userAdress);
 
                     inicioBinding.rvProduct.setHasFixedSize(true);
                     inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
