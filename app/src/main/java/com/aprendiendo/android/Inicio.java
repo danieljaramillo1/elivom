@@ -1,6 +1,7 @@
 package com.aprendiendo.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
@@ -12,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.aprendiendo.android.Adapters.CategoryAdapter;
 import com.aprendiendo.android.Adapters.ProductAdapter;
+import com.aprendiendo.android.Models.CategoryModel;
 import com.aprendiendo.android.Models.Product;
 import com.aprendiendo.android.Models.User;
 import com.aprendiendo.android.Services.CreateUserService;
@@ -39,9 +42,9 @@ public class Inicio extends AppCompatActivity {
     String llave = "sesion";
     ProductAdapter  productAdapter;
     String userAdress;
+    ArrayList<CategoryModel> categoryModel;
+    CategoryAdapter cadapter;
 
-    ArrayList<String> categories;
-    ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class Inicio extends AppCompatActivity {
         GetProducts();
         initElements();
         Intent intent = getIntent();
-         userAdress = intent.getStringExtra("direccion");
+        userAdress = intent.getStringExtra("direccion");
 
 
         inicioBinding.btCloseSesion.setOnClickListener(new View.OnClickListener() {
@@ -67,17 +70,34 @@ public class Inicio extends AppCompatActivity {
 
 
     }
-    // inicializo los shared
+    // inicializo un monton de cositas
     private void initElements()
     {
         preferences = getSharedPreferences("sesiones",Context.MODE_PRIVATE);
         editor = preferences.edit();
-        categories = new ArrayList<>();
-        categories.add("Hamburger");
-        categories.add("hotdogs");
-        categories.add("drinks");
+        inicioBinding.tvUserName.setText(userAdress);
+        Integer[] categoryLogo= {R.drawable.burger,R.drawable.hotdog,R.drawable.pizzas,R.drawable.drinks,R.drawable.postre,R.drawable.pollo,R.drawable.desayuno,R.drawable.oriental,R.drawable.veggie,R.drawable.almuerzo,R.drawable.tacos};
+        String[] categoryNames ={"Burger","hotdog","pizzas","Bebidas","Postres","Pollo","Desayuno","Oriental","Veggie","Almuerzo","Tacos"};
+        categoryModel = new ArrayList<>();
+        for (int i= 0;i<categoryLogo.length;i++)
+        {
+            CategoryModel model = new CategoryModel(categoryLogo[i],categoryNames[i]);
+            categoryModel.add(model);
+            Toast.makeText(getApplicationContext(),categoryModel.get(i).getCategoryName(),Toast.LENGTH_SHORT).show();
 
+        }
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Inicio.this,LinearLayoutManager.HORIZONTAL,false);
+        inicioBinding.rvCategories.setLayoutManager(layoutManager);
+        inicioBinding.rvCategories.setItemAnimator(new DefaultItemAnimator());
+
+        cadapter = new CategoryAdapter(Inicio.this,categoryModel);
+
+        inicioBinding.rvCategories.setAdapter(cadapter);
     }
+
+
+
 
 
 
@@ -99,7 +119,6 @@ public class Inicio extends AppCompatActivity {
                     ArrayList<Product> arrayProducts = response.body();
                     productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
                     inicioBinding.tvUserName.setText(userAdress);
-
                     inicioBinding.rvProduct.setHasFixedSize(true);
                     inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     inicioBinding.rvProduct.setAdapter(productAdapter);
@@ -112,7 +131,7 @@ public class Inicio extends AppCompatActivity {
             }
         });
     }
-    //Metodo boton productos
+
 
 
 

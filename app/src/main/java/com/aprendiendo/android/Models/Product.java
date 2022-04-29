@@ -49,4 +49,14 @@ public class Product {
     private String img_url;
     private int rating;
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    private String category;
+
 }

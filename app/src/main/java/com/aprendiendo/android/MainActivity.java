@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity  {
     private ActivityMainBinding binding;
     String llave = "sesion";
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -120,12 +121,15 @@ public class MainActivity extends AppCompatActivity  {
                             User user = response.body();
                             Toast.makeText(getApplicationContext(),user.adress,Toast.LENGTH_SHORT).show();
                             // dejo logeado al usuario si esta checkeado el radiobutton
+                            
                             saveSession(binding.rbSaveSession.isChecked());
                             //paso a activity inicio y le paso la direccion.
                             Intent inte = new Intent(getApplicationContext(), Inicio.class);
                             String userAdress = user.getAdress();
                             String adress = "direccion";
+
                             inte.putExtra(adress,userAdress);
+
                             startActivity(inte);
 
                         }

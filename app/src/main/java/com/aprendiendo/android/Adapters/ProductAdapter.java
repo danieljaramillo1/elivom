@@ -43,18 +43,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ProductViewHolder holder, int position) {
             Product product = productArray.get(position);
+            holder.itemBinding.tvrating.setText(product.getRating()+",0");
             holder.itemBinding.tvName.setText(product.getName());
-            holder.itemBinding.tvPrice.setText(String.valueOf(product.getPrice()));
+             String precio = "· $"+product.getPrice();
+            holder.itemBinding.tvPrice.setText(precio);
+            holder.itemBinding.tvCategory.setText(" · "+product.getCategory()+" · 1km");
             Glide.with(where).load(product.getImg_url()).into(holder.itemBinding.ivPicture);
-            Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+             Glide.with(where).load(R.mipmap.star).into(holder.itemBinding.ivStar1);
 
-
+                    /*
             // rating starts stuff here*******
             switch (product.getRating())
 
             {
 
                 case 1:
+
                     Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
                     Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar2);
                     Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar3);
@@ -83,15 +87,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
                     break;
                 case 5:
-                   Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
+
+
+                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
                     Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
                     Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
                     Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar4);
                     Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar5);
+
+
                     break;
             }
 
-
+                */
     }
 
     @Override
