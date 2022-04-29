@@ -54,7 +54,8 @@ public class Inicio extends AppCompatActivity {
         GetProducts();
         initElements();
         Intent intent = getIntent();
-        userAdress = intent.getStringExtra("direccion");
+        userAdress = this.preferences.getString("direccion","un direccion");
+
 
 
         inicioBinding.btCloseSesion.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,7 @@ public class Inicio extends AppCompatActivity {
                 }else {
                     ArrayList<Product> arrayProducts = response.body();
                     productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
-                    inicioBinding.tvUserName.setText(userAdress);
+                    inicioBinding.tvUserName.setText(userAdress+"");
                     inicioBinding.rvProduct.setHasFixedSize(true);
                     inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     inicioBinding.rvProduct.setAdapter(productAdapter);

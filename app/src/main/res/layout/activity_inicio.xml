@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/btCloseSesion"
-        android:layout_width="129dp"
-        android:layout_height="35dp"
+        android:layout_width="155dp"
+        android:layout_height="43dp"
         android:text="Cerrar Sesión"
         app:layout_constraintBottom_toTopOf="@+id/rvProduct"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,10 +21,12 @@
 
     <TextView
         android:id="@+id/tvUserName"
-        android:layout_width="168dp"
-        android:layout_height="40dp"
+        android:layout_width="151dp"
+        android:layout_height="25dp"
         android:text="Welcome USER HERE"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="10sp"
+        android:textStyle="bold"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/rvProduct"
         app:layout_constraintEnd_toStartOf="@+id/btCloseSesion"
@@ -49,7 +51,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProduct"
         android:layout_width="0dp"
-        android:layout_height="620dp"
+        android:layout_height="550dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

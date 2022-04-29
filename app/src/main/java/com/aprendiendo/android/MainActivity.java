@@ -1,3 +1,5 @@
+
+
 package com.aprendiendo.android;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity  {
     SharedPreferences.Editor editor;
     private ActivityMainBinding binding;
     String llave = "sesion";
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,10 +129,11 @@ public class MainActivity extends AppCompatActivity  {
                             //paso a activity inicio y le paso la direccion.
                             Intent inte = new Intent(getApplicationContext(), Inicio.class);
                             String userAdress = user.getAdress();
+
                             String adress = "direccion";
 
-                            inte.putExtra(adress,userAdress);
-
+                            editor.putString(adress,userAdress);
+                            editor.apply();
                             startActivity(inte);
 
                         }

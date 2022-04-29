@@ -41,6 +41,8 @@ public class RegistrarUsuarios extends AppCompatActivity {
 
 
     }
+
+
     //metodo para validar nuevo usuario
         public void createUser(View v)
         {
@@ -79,6 +81,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
 
 
 
+
     //metodo para verificar si solo contiene letras
     public static boolean contieneSoloLetras(String cadena) {
         for (int x = 0; x < cadena.length(); x++) {
@@ -106,7 +109,7 @@ public class RegistrarUsuarios extends AppCompatActivity {
                 public void onResponse(Call<User> call, Response<User> response) {
                      if(response.isSuccessful())
                      {
-                         Toast.makeText(getApplicationContext(),"user in the DB", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(),"Todo Correcto", Toast.LENGTH_SHORT).show();
                      }else {
                          Toast.makeText(getApplicationContext(),"there is a problem with you!! ", Toast.LENGTH_SHORT).show();
                      }

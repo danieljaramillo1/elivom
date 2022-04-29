@@ -24,8 +24,8 @@
     <string name="tel">Phone Number:</string>
     <string name="email">Email:</string>
     <string name="country">country:</string>
-    <string name="password">password:</string>
-
+    <string name="password">Password:</string>
+    <string name="back">Atrás</string>
     <string name="agregar_productos">AGREGAR PRODUCTOS</string>
 
 </resources>
