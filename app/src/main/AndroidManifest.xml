@@ -5,6 +5,7 @@
 
     <application
 
+
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <activity android:name=".RegistrarUsuarios" />
-        <activity android:name=".Inicio" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".RegistrarUsuarios"
+            android:exported="true"
+            />
+        <activity android:name=".Inicio"
+            android:exported="true"/>
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

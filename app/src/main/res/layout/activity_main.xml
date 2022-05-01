@@ -48,7 +48,7 @@
         android:drawableStart="@drawable/ic_user_icon"
         android:drawableLeft="@drawable/ic_user_icon"
         android:ems="10"
-        android:hint="@string/Botton4"
+        android:hint="@string/app_name"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColorHighlight="@color/cardview_light_background"
@@ -80,19 +80,18 @@
         app:layout_constraintTop_toBottomOf="@+id/etMail"
         app:layout_constraintVertical_bias="0.283" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/rbSaveSession"
-        android:layout_width="140dp"
-        android:layout_height="27dp"
-
-        android:layout_marginBottom="4dp"
-        android:hint="No cerrar sesion"
-        app:layout_constraintBottom_toTopOf="@+id/btLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="No cerrar sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPass"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.674" />
 
     <Button
         android:id="@+id/btLogin"

@@ -146,13 +146,14 @@
 
     <Button
         android:id="@+id/btBack"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
         android:layout_marginEnd="70dp"
         android:background="@drawable/botton_rounder_red"
         android:drawableStart="@drawable/ic_regresar_negro"
         android:drawableEnd="@drawable/ic_regresar_negro"
+        android:onClick="comeBackToLogin"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

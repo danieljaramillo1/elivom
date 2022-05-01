@@ -49,14 +49,21 @@ public class MainActivity extends AppCompatActivity  {
         {
             Intent inte = new Intent(getApplicationContext(), Inicio.class);
             startActivity(inte);
-
         }else
         {
             String mesage = "inicia sesion";
             Toast.makeText(this,mesage,Toast.LENGTH_SHORT).show();
         }
 
+        binding.rbSaveSession.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                if (binding.rbSaveSession.isChecked()){
+                    binding.rbSaveSession.isChecked();
+                }
+            }
+        });
 
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
