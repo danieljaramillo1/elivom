@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -71,9 +72,12 @@ public class Inicio extends AppCompatActivity {
 
 
     }
+
     // inicializo un monton de cositas
     private void initElements()
     {
+       // Log.d("....TAG....", "initElements function");
+
         preferences = getSharedPreferences("sesiones",Context.MODE_PRIVATE);
         editor = preferences.edit();
         inicioBinding.tvUserName.setText(userAdress);
@@ -84,7 +88,7 @@ public class Inicio extends AppCompatActivity {
         {
             CategoryModel model = new CategoryModel(categoryLogo[i],categoryNames[i]);
             categoryModel.add(model);
-            Toast.makeText(getApplicationContext(),categoryModel.get(i).getCategoryName(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),categoryModel.get(i).getCategoryName(),Toast.LENGTH_SHORT).show();
 
         }
 
@@ -95,6 +99,7 @@ public class Inicio extends AppCompatActivity {
         cadapter = new CategoryAdapter(Inicio.this,categoryModel);
 
         inicioBinding.rvCategories.setAdapter(cadapter);
+
     }
 
 

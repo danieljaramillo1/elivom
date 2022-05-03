@@ -27,5 +27,7 @@
     <string name="password">Password:</string>
     <string name="back">Atrás</string>
     <string name="agregar_productos">AGREGAR PRODUCTOS</string>
-
+    <string name="descripcion">Aca deberia ir una pequeña descripcion del producto con las cosas que se les puede agregar pero eso seria demasiado trabajo para meterle una descripcion unitaria a a cada producto asi que voy a hacer algo generico aca.Saludos</string>
+    <string name="sector">Nombre Tienda(Sector)</string>
+    <string name="time">15-25min</string>
 </resources>
