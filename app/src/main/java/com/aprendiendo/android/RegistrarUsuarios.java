@@ -1,5 +1,6 @@
 package com.aprendiendo.android;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,11 @@ public class RegistrarUsuarios extends AppCompatActivity {
 
 
         }
+
+    public void comeBackToLogin(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
 
 

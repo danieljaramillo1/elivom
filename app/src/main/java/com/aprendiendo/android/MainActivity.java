@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity  {
         }
 
 
-
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
