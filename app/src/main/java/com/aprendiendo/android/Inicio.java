@@ -57,8 +57,6 @@ public class Inicio extends AppCompatActivity {
         Intent intent = getIntent();
         userAdress = this.preferences.getString("direccion","un direccion");
 
-
-
         inicioBinding.btCloseSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,28 +66,21 @@ public class Inicio extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     // inicializo un monton de cositas
     private void initElements()
     {
-       // Log.d("....TAG....", "initElements function");
-
         preferences = getSharedPreferences("sesiones",Context.MODE_PRIVATE);
         editor = preferences.edit();
         inicioBinding.tvUserName.setText(userAdress);
         Integer[] categoryLogo= {R.drawable.burger,R.drawable.hotdog,R.drawable.pizzas,R.drawable.drinks,R.drawable.postre,R.drawable.pollo,R.drawable.desayuno,R.drawable.oriental,R.drawable.veggie,R.drawable.almuerzo,R.drawable.tacos};
-        String[] categoryNames ={"Burger","hotdog","pizzas","Bebidas","Postres","Pollo","Desayuno","Oriental","Veggie","Almuerzo","Tacos"};
+        String[] categoryNames ={"hamburguer","hotdog","pizza","bebida","postre","pollo","desayuno","oriental","vegetariana","almuerzo","tacos"};
         categoryModel = new ArrayList<>();
         for (int i= 0;i<categoryLogo.length;i++)
         {
             CategoryModel model = new CategoryModel(categoryLogo[i],categoryNames[i]);
             categoryModel.add(model);
-            //Toast.makeText(getApplicationContext(),categoryModel.get(i).getCategoryName(),Toast.LENGTH_SHORT).show();
-
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Inicio.this,LinearLayoutManager.HORIZONTAL,false);
@@ -101,11 +92,6 @@ public class Inicio extends AppCompatActivity {
         inicioBinding.rvCategories.setAdapter(cadapter);
 
     }
-
-
-
-
-
 
     public void GetProducts()
     {
