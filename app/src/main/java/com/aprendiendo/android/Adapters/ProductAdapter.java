@@ -49,8 +49,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             Product product = productArray.get(position);
             holder.itemBinding.tvrating.setText(product.getRating()+",0");
             holder.itemBinding.tvName.setText(product.getName());
-            String precio = "· $"+product.getPrice();
-            holder.itemBinding.tvPrice.setText(precio);
+            Integer precio = product.getPrice();
+            holder.itemBinding.tvPrice.setText(precio.toString());
             holder.itemBinding.tvCategory.setText(" · "+product.getCategory()+" · 1km");
             Glide.with(where).load(product.getImg_url()).into(holder.itemBinding.ivPicture);
             Glide.with(where).load(R.mipmap.star).into(holder.itemBinding.ivStar1);

@@ -93,11 +93,13 @@
             android:background="@color/white"
             android:drawableStart="@drawable/ic_less_black"
             android:paddingLeft="10dp"
+            android:enabled="false"
 
             >
 
         </Button>
         <TextView
+            android:id="@+id/tvAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
@@ -120,7 +122,7 @@
 
         <Button
             android:id="@+id/btConfirm"
-            android:layout_width="190dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:background="@color/red"
             android:textColor="@color/black"
@@ -128,6 +130,13 @@
             >
 
         </Button>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/confirma"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            ></TextView>
 
 
     </LinearLayout>

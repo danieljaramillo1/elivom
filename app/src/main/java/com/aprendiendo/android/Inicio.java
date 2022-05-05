@@ -24,6 +24,7 @@ import com.aprendiendo.android.Services.GetAllProducts;
 import com.aprendiendo.android.databinding.ActivityInicioBinding;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,10 +32,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import com.aprendiendo.android.Services.ipConfig;
-
+import com.aprendiendo.android.Adapters.CategoryAdapter;
 import static com.aprendiendo.android.Services.ipConfig.ip;
 
 public class Inicio extends AppCompatActivity {
+
 
     private Retrofit retrofit;
     private ActivityInicioBinding inicioBinding;
@@ -52,6 +54,7 @@ public class Inicio extends AppCompatActivity {
         inicioBinding = ActivityInicioBinding.inflate(getLayoutInflater());
         View view = inicioBinding.getRoot();
         setContentView(view);
+
         GetProducts();
         initElements();
         Intent intent = getIntent();
@@ -103,16 +106,14 @@ public class Inicio extends AppCompatActivity {
     }
 
 
-
-
-
-
     public void GetProducts()
     {
+        String esto =  CategoryAdapter.selectedCategory;
         retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
         GetAllProducts service = retrofit.create(GetAllProducts.class);
         Product newProduct = new Product();
         Call<ArrayList<Product>> myProducts = service.GetProducts();
+
         myProducts.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
@@ -122,12 +123,36 @@ public class Inicio extends AppCompatActivity {
 
                    return;
                 }else {
+
+                    
                     ArrayList<Product> arrayProducts = response.body();
-                    productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
-                    inicioBinding.tvUserName.setText(userAdress+"");
-                    inicioBinding.rvProduct.setHasFixedSize(true);
-                    inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    inicioBinding.rvProduct.setAdapter(productAdapter);
+
+
+                        if (CategoryAdapter.selectedCategory.equals("null"))
+                        {
+                            productAdapter = new ProductAdapter(getApplicationContext(),arrayProducts);
+                            inicioBinding.rvProduct.setHasFixedSize(true);
+                            inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            inicioBinding.rvProduct.setAdapter(productAdapter);
+                        }
+                        else
+                        {
+                            Iterator<Product> iterator = arrayProducts.iterator();
+                            while(iterator.hasNext())
+                            {
+                                Product product = iterator.next();
+                                if (!product.getCategory().equals(CategoryAdapter.selectedCategory))
+                                {
+                                        iterator.remove();
+                                }
+                            }
+                            productAdapter = new ProductAdapter(??????????,arrayProducts);
+                            inicioBinding.rvProduct.setHasFixedSize(true);
+                            inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            inicioBinding.rvProduct.setAdapter(productAdapter);
+                        }
+                    inicioBinding.tvUserName.setText("Bienvenido Tu direccion es: "+userAdress);
+
                 }
 
             }
@@ -137,6 +162,10 @@ public class Inicio extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 
 
 
