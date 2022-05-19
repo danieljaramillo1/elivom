@@ -6,16 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
 import com.aprendiendo.android.Adapters.CartAdapter;
 import com.aprendiendo.android.Models.CartItemModel;
+import com.aprendiendo.android.Models.InvoiceItemModel;
 import com.aprendiendo.android.Services.CreateUserService;
 import com.aprendiendo.android.Services.GetAllCartItems;
 import com.aprendiendo.android.Services.GetAllProducts;
 import com.aprendiendo.android.databinding.ActivityCartBinding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -31,6 +34,7 @@ public class Cart extends AppCompatActivity {
     Retrofit retrofit;
     CartAdapter cartAdapter;
     ArrayList<CartItemModel> cartProducts;
+    ArrayList<InvoiceItemModel> invoiceArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,22 +43,74 @@ public class Cart extends AppCompatActivity {
         setContentView(view);
         ShowCart();
 
+
         binding.btB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Inicio.class);
+                invoiceArray = new ArrayList<>();
+                InvoiceItemModel itemModel = new InvoiceItemModel();
+                itemModel.setId(0);
+                itemModel.setName("Hamburguesa");
+                itemModel.setCant(1);
+                itemModel.setPriceU(2000);
+                invoiceArray.add(itemModel);
+
+                Intent intent = new Intent(getApplicationContext(), InvoiceActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ARRAYLIST", (Serializable) invoiceArray);
+                intent.putExtra("BUNDLE", bundle);
                 startActivity(intent);
             }
-
-
         });
-
-
     }
 
 
 
+public void goToInvoice(){
+    invoiceArray = new ArrayList<>();
+    InvoiceItemModel itemModel = new InvoiceItemModel();
+    itemModel.setId(0);
+    itemModel.setName("Hamburguesa");
+    itemModel.setCant(1);
+    itemModel.setPriceU(2000);
+    invoiceArray.add(itemModel);
 
+
+    /*
+    Intent intent = new Intent(SendActivity.this, PickContactsActivity.class);
+    Bundle bundle;
+    bundle.putParcelableArrayList("data", cons); // Be sure con is not null here
+    intent.putExtras(bundle);
+
+
+ArrayList<Object> object = new ArrayList<Object>();
+Intent intent = new Intent(Current.class, Transfer.class);
+ Bundle args = new Bundle();
+  args.putSerializable("ARRAYLIST",(Serializable)object);
+   intent.putExtra("BUNDLE",args);
+    startActivity(intent);
+     */
+
+    Intent intent = new Intent(getApplicationContext(), InvoiceActivity.class);
+    Bundle bundle = new Bundle();
+    bundle.putSerializable("ARRAYLIST", (Serializable) invoiceArray);
+    intent.putExtra("BUNDLE", bundle);
+    startActivity(intent);
+
+    /*Intent intent = new Intent(getApplicationContext(),InvoiceActivity.class);
+    Bundle bundle = new Bundle();
+    bundle.putParcelableArrayList("invoiceArray", (ArrayList<? extends Parcelable>) invoiceArray);
+    intent.putExtras(bundle);
+    startActivity(intent);
+     */
+        /*
+            ArrayList<String> milista = new ArrayList<String>();
+            Intent intent = new Intent(this, SegundaActivity.class);
+            intent.putExtra("miLista", milista);
+            startActivity(intent);
+
+ */
+}
 
 
 

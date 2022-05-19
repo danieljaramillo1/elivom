@@ -67,58 +67,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     intent.putExtra("price",precio);
                     intent.putExtra("id",product.getId());
                     where.startActivity(intent);
-
                 }
             });
-                    /*
-            // rating starts stuff here*******
-            switch (product.getRating())
-
-            {
-
-                case 1:
-
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar2);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar3);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar4);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
-                break;
-                case 2:
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar3);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar4);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
-                    break;
-                case 3:
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar4);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
-                    break;
-                case 4:
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar4);
-                    Glide.with(where).load("https://toppng.com/uploads/preview/free-png-grey-star-png-images-transparent-grey-star-icon-11562980999ctbeqsdgmf.png").into(holder.itemBinding.ivStar5);
-                    break;
-                case 5:
-
-
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar1);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar2);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar3);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar4);
-                    Glide.with(where).load("https://esquilo.io/png/thumb/YeYZYIJFIwAnfaT-Gold-Star-PNG-Photos.png").into(holder.itemBinding.ivStar5);
-
-
-                    break;
-            }
-
-                */
     }
 
     @Override

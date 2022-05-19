@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".prueba"></activity>
+        <activity
+            android:name=".InvoiceActivity"
+            android:exported="false" />
+        <activity android:name=".prueba" />
         <activity android:name=".Cart" />
         <activity android:name=".ConfirmPurchase" />
         <activity android:name=".RegistrarUsuarios" />
