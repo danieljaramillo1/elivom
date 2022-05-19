@@ -109,6 +109,8 @@ public class RegistrarUsuarios extends AppCompatActivity {
             newUser.setEmail(binding.etEmail.getText().toString());
             newUser.setAdress(binding.etAdress.getText().toString());
             newUser.setPassword(binding.etPassword.getText().toString());
+            newUser.setState(0);
+
             Call<User> create = service.CreateUser(newUser);
             create.enqueue(new Callback<User>() {
                 @Override
@@ -116,6 +118,8 @@ public class RegistrarUsuarios extends AppCompatActivity {
                      if(response.isSuccessful())
                      {
                          Toast.makeText(getApplicationContext(),"Todo Correcto", Toast.LENGTH_SHORT).show();
+                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                         startActivity(intent);
                      }else {
                          Toast.makeText(getApplicationContext(),"there is a problem with you!! ", Toast.LENGTH_SHORT).show();
                      }

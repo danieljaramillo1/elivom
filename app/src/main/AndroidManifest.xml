@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Cart"></activity>
+        <activity android:name=".prueba"></activity>
+        <activity android:name=".Cart" />
         <activity android:name=".ConfirmPurchase" />
         <activity android:name=".RegistrarUsuarios" />
         <activity android:name=".Inicio" />

@@ -82,9 +82,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="55dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
         >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_regresar_negro"
+            android:drawableEnd="@drawable/ic_regresar_negro"
+            android:textColor="@color/white"
+            android:text="@string/back"
+            android:id="@+id/btBackToInicio"
+            android:textSize="10sp"
+            android:paddingEnd="10dp"
+            ></Button>
 
         <Button
             android:id="@+id/btLess"
@@ -134,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/confirma"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
             ></TextView>
 

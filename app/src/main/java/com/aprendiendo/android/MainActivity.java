@@ -43,11 +43,13 @@ public class MainActivity extends AppCompatActivity  {
         View view = binding.getRoot();
         setContentView(view);
         initElements();
+
         usuario = new User();
 
         if (checkSession())
         {
             Intent inte = new Intent(getApplicationContext(), Inicio.class);
+            inte.putExtra("compro","no");
             startActivity(inte);
 
         }else
@@ -128,9 +130,7 @@ public class MainActivity extends AppCompatActivity  {
                             //paso a activity inicio y le paso la direccion.
                             Intent inte = new Intent(getApplicationContext(), Inicio.class);
                             String userAdress = user.getAdress();
-
                             String adress = "direccion";
-
                             editor.putString(adress,userAdress);
                             editor.apply();
                             startActivity(inte);

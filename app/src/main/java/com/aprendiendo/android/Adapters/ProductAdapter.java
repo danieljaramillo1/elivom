@@ -30,6 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private Context where;
     CardItemBinding cardItemBinding;
     private ArrayList<Product> productArray;
+
     public ProductAdapter(Context where, ArrayList<Product> productArray)
     {
         this.where = where;
@@ -64,6 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     intent.putExtra("image",product.getImg_url());
                     intent.putExtra("name",product.getName());
                     intent.putExtra("price",precio);
+                    intent.putExtra("id",product.getId());
                     where.startActivity(intent);
 
                 }

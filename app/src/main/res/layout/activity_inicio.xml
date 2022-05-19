@@ -96,12 +96,12 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <ImageView
+        <Button
 
             android:id="@+id/ivCarrito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:background="@drawable/ic_carrito_naranja"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -111,10 +111,10 @@
             app:srcCompat="@drawable/ic_carrito_naranja"
             />
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btCartproductsAlert"
             android:layout_width="33dp"
             android:layout_height="33dp"
-            android:text="1"
+            android:text="0"
             android:textAlignment="center"
             android:background="@drawable/botton_rounder_red"
             app:layout_constraintBottom_toBottomOf="@+id/ivCarrito"
