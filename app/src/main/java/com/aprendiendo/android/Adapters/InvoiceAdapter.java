@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aprendiendo.android.Models.CartItemModel;
+
 import com.aprendiendo.android.Models.InvoiceItemModel;
 import com.aprendiendo.android.databinding.InvoiceItemBinding;
 
@@ -27,7 +27,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
 
     @NonNull
     @Override
-    public InvoiceAdapter.InvoiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public InvoiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         invoiceItemBinding = InvoiceItemBinding.inflate(LayoutInflater.from(where));
         return new InvoiceViewHolder(invoiceItemBinding);
     }
@@ -35,10 +35,11 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
     @Override
     public void onBindViewHolder(@NonNull InvoiceAdapter.InvoiceViewHolder holder, int position) {
         InvoiceItemModel invoice = invoiceItems.get(position);
-        holder.itemBinding.invName.setText(invoice.getName()+"");
-        holder.itemBinding.invCant.setText(invoice.getCant()+"");
-        holder.itemBinding.invPrecU.setText(invoice.getPriceU()+"");
-        holder.itemBinding.invPrecT.setText(invoice.getPriceT()+"");
+        holder.itemBinding.invName.setText(invoice.getName());
+        holder.itemBinding.invCant.setText(String.valueOf(invoice.getCant()));
+        holder.itemBinding.invPrecU.setText(String.valueOf(invoice.getPriceU()));
+
+        holder.itemBinding.invPrecT.setText(String.valueOf(invoice.getPriceT()));
     }
 
     @Override

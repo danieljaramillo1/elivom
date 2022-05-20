@@ -19,6 +19,8 @@ import com.aprendiendo.android.Services.GetAllProducts;
 import com.aprendiendo.android.databinding.ActivityCartBinding;
 
 import java.io.Serializable;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -42,27 +44,45 @@ public class Cart extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         ShowCart();
+        invoiceArray = new ArrayList<>();
 
 
-        binding.btB.setOnClickListener(new View.OnClickListener() {
+        binding.btPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                invoiceArray = new ArrayList<>();
-                InvoiceItemModel itemModel = new InvoiceItemModel();
-                itemModel.setId(0);
-                itemModel.setName("Hamburguesa");
-                itemModel.setCant(1);
-                itemModel.setPriceU(2000);
-                invoiceArray.add(itemModel);
+
+
+
+                for(int i=0;i<cartProducts.size();i++)
+                {
+                    InvoiceItemModel itemModel = new InvoiceItemModel();
+                    itemModel.setId(i);
+                    itemModel.setName(cartProducts.get(i).getName());
+                    itemModel.setCant(cartProducts.get(i).getCant());
+                    itemModel.setPriceU(cartProducts.get(i).getPrice());
+                    invoiceArray.add(itemModel);
+                }
+
+/*
+                Intent intent = new Intent(getApplicationContext(), InvoiceActivity.class);
+                intent.putExtra("invoiceArray",invoiceArray);
+                startActivity(intent);
+
+
+                    Intent i = new Intent(MainActivity.this, ReferenciasFavoritas.class);
+                    i.putParcelableArrayListExtra("Lista",  Lista);
+                    startActivity(i);
+ */
 
                 Intent intent = new Intent(getApplicationContext(), InvoiceActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ARRAYLIST", (Serializable) invoiceArray);
-                intent.putExtra("BUNDLE", bundle);
+                intent.putParcelableArrayListExtra("ARRAYLIST", (ArrayList<? extends Parcelable>) invoiceArray);
                 startActivity(intent);
             }
         });
+
+
     }
+
 
 
 
@@ -76,40 +96,11 @@ public void goToInvoice(){
     invoiceArray.add(itemModel);
 
 
-    /*
-    Intent intent = new Intent(SendActivity.this, PickContactsActivity.class);
-    Bundle bundle;
-    bundle.putParcelableArrayList("data", cons); // Be sure con is not null here
-    intent.putExtras(bundle);
-
-
-ArrayList<Object> object = new ArrayList<Object>();
-Intent intent = new Intent(Current.class, Transfer.class);
- Bundle args = new Bundle();
-  args.putSerializable("ARRAYLIST",(Serializable)object);
-   intent.putExtra("BUNDLE",args);
-    startActivity(intent);
-     */
-
     Intent intent = new Intent(getApplicationContext(), InvoiceActivity.class);
     Bundle bundle = new Bundle();
     bundle.putSerializable("ARRAYLIST", (Serializable) invoiceArray);
     intent.putExtra("BUNDLE", bundle);
     startActivity(intent);
-
-    /*Intent intent = new Intent(getApplicationContext(),InvoiceActivity.class);
-    Bundle bundle = new Bundle();
-    bundle.putParcelableArrayList("invoiceArray", (ArrayList<? extends Parcelable>) invoiceArray);
-    intent.putExtras(bundle);
-    startActivity(intent);
-     */
-        /*
-            ArrayList<String> milista = new ArrayList<String>();
-            Intent intent = new Intent(this, SegundaActivity.class);
-            intent.putExtra("miLista", milista);
-            startActivity(intent);
-
- */
 }
 
 

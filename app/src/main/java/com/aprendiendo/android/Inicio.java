@@ -65,6 +65,7 @@ public class Inicio extends AppCompatActivity {
         inicioBinding = ActivityInicioBinding.inflate(getLayoutInflater());
         View view = inicioBinding.getRoot();
         setContentView(view);
+
         Bundle extras = getIntent().getExtras();
         initElements();
         showCategory();

@@ -1,11 +1,39 @@
 package com.aprendiendo.android.Models;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class InvoiceItemModel {
+import java.io.Serializable;
+
+
+public class InvoiceItemModel implements Parcelable {
 
     int id;
     private String name;
     int cant;
     private int priceU;
+
+    public InvoiceItemModel(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        cant = in.readInt();
+        priceU = in.readInt();
+    }
+
+    public static final Creator<InvoiceItemModel> CREATOR = new Creator<InvoiceItemModel>() {
+        @Override
+        public InvoiceItemModel createFromParcel(Parcel in) {
+            return new InvoiceItemModel(in);
+        }
+
+        @Override
+        public InvoiceItemModel[] newArray(int size) {
+            return new InvoiceItemModel[size];
+        }
+    };
+
+    public InvoiceItemModel() {
+
+    }
 
     public int getId() {
         return id;
@@ -41,5 +69,19 @@ public class InvoiceItemModel {
 
     public int getPriceT() {
         return priceU*cant;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeInt(cant);
+        parcel.writeInt(priceU);
     }
 }
