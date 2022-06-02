@@ -1,6 +1,7 @@
 package com.aprendiendo.android.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aprendiendo.android.Cart;
+import com.aprendiendo.android.Inicio;
 import com.aprendiendo.android.Models.CartItemModel;
 import com.aprendiendo.android.Services.DeleteCartItem;
+import com.aprendiendo.android.Services.GetAllCartItems;
 import com.aprendiendo.android.Services.GetAllProducts;
 import com.aprendiendo.android.databinding.CartItemBinding;
 import com.bumptech.glide.Glide;
@@ -29,10 +32,11 @@ import static com.aprendiendo.android.Services.ipConfig.ip;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>
 {
-    private Context where;
+     Context where;
     CartItemBinding cartBinding;
     private ArrayList<CartItemModel> cartItems;
     Retrofit retrofit;
+    Context context;
 
     public CartAdapter(Context where, ArrayList<CartItemModel> cartItems)
     {
@@ -71,6 +75,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                         Toast.makeText(where,s,Toast.LENGTH_SHORT).show();
                         cartItems.remove(producto);
                         notifyDataSetChanged();
+
+                        GetAllCartItems service = retrofit.create(GetAllCartItems.class);
+                        Call<ArrayList<CartItemModel>> array = service.GetCart();
+                        array.enqueue(new Callback<ArrayList<CartItemModel>>() {
+                            @Override
+                            public void onResponse(Call<ArrayList<CartItemModel>> call, Response<ArrayList<CartItemModel>> response) {
+                               if(response.body().size()==0)
+                               {
+                                   Intent intent = new Intent(where,Cart.class);
+                                   where.startActivity(intent);
+
+
+                               }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ArrayList<CartItemModel>> call, Throwable t) {
+
+                            }
+                        });
 
 
                     }

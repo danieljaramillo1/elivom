@@ -54,12 +54,13 @@ public class RegistrarUsuarios extends AppCompatActivity {
             String adress = binding.etAdress.getText().toString();
             String password = binding.etPassword.getText().toString();
 
+
             if(email.isEmpty()||password.isEmpty()||name.isEmpty()||adress.isEmpty())
             {
                     Toast.makeText(this,"Don´t let any field Empty!", Toast.LENGTH_SHORT).show();
 
             }
-            else if(!contieneSoloLetras(name))
+            else if(!ContieneSoloLetras(name))
             {
                     Toast.makeText(this,"Only aphabetical here please!try Again", Toast.LENGTH_SHORT).show();
                     binding.etName.setText("");
@@ -68,32 +69,96 @@ public class RegistrarUsuarios extends AppCompatActivity {
             else if(password.length()<8)
             {
                 Toast.makeText(this,"Sorry, put at least 8 characters here please", Toast.LENGTH_SHORT).show();
-
+                binding.etPassword.setText("");
             }
-            else
+            else if(password.equals(password.toLowerCase()))
+            {
+                Toast.makeText(this,"yot password must contain at least 1 upper case letter!", Toast.LENGTH_SHORT).show();
+                binding.etPassword.setText("");
+            }
+            else if(contieneVacios(password))
+            {
+                Toast.makeText(this,"dont let any empty espace in your password!", Toast.LENGTH_SHORT).show();
+            }
+            else if(ContieneSoloLetrasyNumeros(password))
+            {
+                Toast.makeText(this,"you need at least one speacial character in your password!", Toast.LENGTH_SHORT).show();
+            }
+            else if(!ContieneCarcterEspecial(password))
+            {
+                Toast.makeText(this,"you need an special Char",Toast.LENGTH_SHORT).show();
+            }
+               else
                 {
 
                     CreateUsers();
 
                 }
-
+           // else if(password.contains("*"))
+          //  "@#$%^`<>&+=\"!ºª·#~%&'¿¡€,:;*/+-.=_\\[\\]\\(\\)\\|\\_\\?\\\\"
 
         }
+
+
+
 
     public void comeBackToLogin(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+        //Verifica si contiene vacios
+    public static boolean contieneVacios(String string)
+    {
+        for(int i=0;i<string.length();i++)
+        {
+            char c = string.charAt(i);
+            if(c==' ')
+            {
+                return true;
+            }
 
+        }
+        return false;
+    }
 
 
 
     //metodo para verificar si solo contiene letras
-    public static boolean contieneSoloLetras(String cadena) {
+    public static boolean ContieneSoloLetras(String cadena) {
         for (int x = 0; x < cadena.length(); x++) {
             char c = cadena.charAt(x);
             // Si no está entre a y z, ni entre A y Z, ni es un espacio
             if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean ContieneCarcterEspecial(String string)
+    {
+        String specialChars = "@#$%^`<>&+=!ºª·#~%&'¿¡€,:;*/+-.=_";
+        for(int i=0; i<string.length();i++)
+        {
+            char charat = string.charAt(i);
+           for (int x=0; x<specialChars.length();x++)
+           {
+               if(charat==specialChars.charAt(x))
+               {
+
+                   return true;
+               }
+           }
+        }
+        return false;
+
+    }
+
+    public static boolean ContieneSoloLetrasyNumeros(String cadena) {
+        for (int x = 0; x < cadena.length(); x++) {
+            char c = cadena.charAt(x);
+            // Si no está entre a y z, ni entre A y Z, ni es un espacio
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')|| (c >= '0' && c <= '9')) {
                 return false;
             }
         }

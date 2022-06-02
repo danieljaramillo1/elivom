@@ -1,5 +1,7 @@
 package com.aprendiendo.android.Models;
 
+import android.os.Parcelable;
+
 public class Product {
 
     private int id;

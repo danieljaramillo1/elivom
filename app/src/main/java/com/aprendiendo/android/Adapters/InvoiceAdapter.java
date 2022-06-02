@@ -38,7 +38,6 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
         holder.itemBinding.invName.setText(invoice.getName());
         holder.itemBinding.invCant.setText(String.valueOf(invoice.getCant()));
         holder.itemBinding.invPrecU.setText(String.valueOf(invoice.getPriceU()));
-
         holder.itemBinding.invPrecT.setText(String.valueOf(invoice.getPriceT()));
     }
 

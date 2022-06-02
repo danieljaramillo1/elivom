@@ -44,18 +44,20 @@ import static com.aprendiendo.android.Services.ipConfig.ip;
 
 public class Inicio extends AppCompatActivity {
 
-     Retrofit retrofit;
-     ActivityInicioBinding inicioBinding;
-     SharedPreferences preferences;
-     SharedPreferences.Editor editor;
-     String llave = "sesion";
-     ProductAdapter  productAdapter;
+    Retrofit retrofit;
+    ActivityInicioBinding inicioBinding;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    String llave = "sesion";
+    ProductAdapter  productAdapter;
     String userAdress;
     ArrayList<Product> arrayProducts;
     ArrayList<CategoryModel> categoryModel;
     CategoryAdapter cadapter;
     ArrayList<CartItemModel> cartItems;
     int cantCartItems;
+
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -67,36 +69,10 @@ public class Inicio extends AppCompatActivity {
         setContentView(view);
 
         Bundle extras = getIntent().getExtras();
+        updateRedCounter();
         initElements();
         showCategory();
         GetProducts();
-
-        retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
-        GetAllCartItems service = retrofit.create(GetAllCartItems.class);
-        Call<ArrayList<CartItemModel>> compras = service.GetCart();
-        compras.enqueue(new Callback<ArrayList<CartItemModel>>() {
-            @Override
-            public void onResponse(Call<ArrayList<CartItemModel>> call, Response<ArrayList<CartItemModel>> response) {
-                cartItems = response.body();
-                cantCartItems = cartItems.size();
-
-                if (cantCartItems!=0)
-                {
-                    inicioBinding.btCartproductsAlert.setVisibility(View.VISIBLE);
-                    inicioBinding.btCartproductsAlert.setText(String.valueOf(cantCartItems));
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<CartItemModel>> call, Throwable t) {
-
-            }
-
-        });
-
-
-
 
 
         //Toast.makeText(this,""+compro,Toast.LENGTH_SHORT).show();
@@ -147,12 +123,50 @@ public class Inicio extends AppCompatActivity {
 
             }
         });
+                //NOS MANDA AL CARRITO
         inicioBinding.ivCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),Cart.class);
                 startActivity(intent);
             }
+        });
+
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        Toast.makeText(getApplicationContext(),"onResume",Toast.LENGTH_SHORT).show();
+        updateRedCounter();
+        super.onPostResume();
+    }
+
+        //actualiza el contador de productos en carrito
+    public void updateRedCounter()
+    {
+        retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
+        GetAllCartItems service = retrofit.create(GetAllCartItems.class);
+        Call<ArrayList<CartItemModel>> compras = service.GetCart();
+        compras.enqueue(new Callback<ArrayList<CartItemModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<CartItemModel>> call, Response<ArrayList<CartItemModel>> response) {
+                cartItems = response.body();
+                cantCartItems = cartItems.size();
+
+                if (cantCartItems!=0)
+                {
+                    inicioBinding.btCartproductsAlert.setVisibility(View.VISIBLE);
+                    inicioBinding.btCartproductsAlert.setText(String.valueOf(cantCartItems));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<CartItemModel>> call, Throwable t) {
+
+            }
+
         });
 
     }
@@ -205,7 +219,7 @@ public class Inicio extends AppCompatActivity {
     public void showCategory()
     {
         Integer[] categoryLogo= {R.drawable.burger,R.drawable.hotdog,R.drawable.pizzas,R.drawable.drinks,R.drawable.postre,R.drawable.pollo,R.drawable.desayuno,R.drawable.oriental,R.drawable.veggie,R.drawable.almuerzo,R.drawable.tacos};
-        String[] categoryNames ={"Burger","hotdog","pizzas","Bebidas","Postres","Pollo","Desayuno","Oriental","Veggie","Almuerzo","Tacos"};
+        String[] categoryNames ={"Burgers","Hotdogs","Pizzas","Bebidas","Postres","Pollos","Desayunos","Oriental","Veggie","Almuerzos","Tacos"};
         categoryModel = new ArrayList<>();
         for (int i= 0;i<categoryLogo.length;i++)
         {
@@ -220,6 +234,36 @@ public class Inicio extends AppCompatActivity {
         inicioBinding.rvCategories.setItemAnimator(new DefaultItemAnimator());
         cadapter = new CategoryAdapter(Inicio.this,categoryModel);
         inicioBinding.rvCategories.setAdapter(cadapter);
+    }
+
+    public void FilterProducts(String categoryName)
+    {
+
+        retrofit = new Retrofit.Builder().baseUrl(ip).addConverterFactory(GsonConverterFactory.create()).build();
+        GetAllProducts service = retrofit.create(GetAllProducts.class);
+        Call<ArrayList<Product>> myProducts = service.GetProducts(categoryName);
+        myProducts.enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                if(!response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(),"error no se recibio una respuesta de la api",Toast.LENGTH_SHORT).show();
+                }else {
+                    ArrayList<Product> productosFiltrados = response.body();
+                    productAdapter = new ProductAdapter(getApplicationContext(),productosFiltrados);
+                    inicioBinding.rvProduct.setHasFixedSize(true);
+                    inicioBinding.rvProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    inicioBinding.rvProduct.setAdapter(productAdapter);
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+            }
+        });
     }
 
 

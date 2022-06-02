@@ -60,7 +60,7 @@ public class ConfirmPurchase extends AppCompatActivity {
         binding.btConfirm.setText("$"+precio[0]);
         binding.tvAmount.setText(amount.toString());
 
-        //regresoa inicio
+        //regreso a inicio
         binding.btBackToInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

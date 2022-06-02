@@ -1,6 +1,8 @@
 package com.aprendiendo.android.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +78,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                         }else{
                             productosFiltrados = response.body();
                             Toast.makeText(where,"el primer producto de la lista es"+productosFiltrados.get(0).getName(),Toast.LENGTH_SHORT).show();
-                            
+                            ((Inicio)where).FilterProducts(categoryModels.get(position).getCategoryName());
                             return;
                         }
 

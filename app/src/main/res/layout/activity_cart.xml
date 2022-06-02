@@ -35,10 +35,22 @@
             android:textColor="@color/black"
             android:layout_marginStart="15dp"
 
+
             ></Button>
 
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/tvEmptyCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carrito Vacio Agrega Algo"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:layout_marginStart="90dp">
+
+    </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCartProducts"
@@ -48,6 +60,8 @@
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +77,8 @@
             android:textColor="@color/black"
             android:drawableStart="@drawable/ic_carrito_naranja"
             android:gravity="center"
-            android:layout_marginStart="45dp">
+            android:layout_marginStart="45dp"
+            android:enabled="false">
 
 
         </Button>

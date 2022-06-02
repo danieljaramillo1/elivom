@@ -35,7 +35,7 @@
             android:inputType="textPersonName"
             android:paddingLeft="6dp"
             android:textAlignment="inherit"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@android:color/holo_red_light"
             android:textColorHighlight="@android:color/holo_red_dark"
             android:textColorHint="@android:color/holo_red_dark"
             android:textSize="18sp"

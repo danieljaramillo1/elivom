@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity  {
                             Intent inte = new Intent(getApplicationContext(), Inicio.class);
                             String userAdress = user.getAdress();
                             String adress = "direccion";
+                            int userId= user.getId();
+
                             editor.putString(adress,userAdress);
                             editor.apply();
                             startActivity(inte);

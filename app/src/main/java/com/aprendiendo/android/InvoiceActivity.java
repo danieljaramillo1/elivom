@@ -22,6 +22,7 @@ public class InvoiceActivity extends AppCompatActivity {
     ActivityInvoiceBinding invoiceBinding;
     InvoiceAdapter invoiceAdapter;
     ArrayList<? extends Parcelable> invoiceArray;
+    int totalInvoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,51 +30,36 @@ public class InvoiceActivity extends AppCompatActivity {
         invoiceBinding = ActivityInvoiceBinding.inflate(getLayoutInflater());
         View view = invoiceBinding.getRoot();
         setContentView(view);
-
-
-
-        // for delete
-    /*
-        invoiceArray = new ArrayList<>();
-        InvoiceItemModel itemModel = new InvoiceItemModel();
-        itemModel.setId(0);
-        itemModel.setName("Hamburguesa");
-        itemModel.setCant(2);
-        itemModel.setPriceU(2000);
-        invoiceArray.add(itemModel);
-        */
-
+        totalInvoice = 0;
+        InvoiceItemModel modelo ;
 
         invoiceArray = (ArrayList<? extends Parcelable>) getIntent().getParcelableArrayListExtra("ARRAYLIST");
         invoiceAdapter = new InvoiceAdapter(getApplicationContext(), (ArrayList<InvoiceItemModel>) invoiceArray);
         invoiceBinding.rvInvoice.setHasFixedSize(true);
         invoiceBinding.rvInvoice.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         invoiceBinding.rvInvoice.setAdapter(invoiceAdapter);
-        //Log.d("------taggg-----", "onCreate: "+String.valueOf(invoiceArray.get(0).toString()));
-        //Toast.makeText(this, invoiceArray.get(0).getName(), Toast.LENGTH_SHORT).show();
+
+        //REGRESO A INICIO
+        invoiceBinding.btOutofInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Inicio.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        // SE SACA EL TOTAL DE LA FACTURA
+
+        for(int i=0;i<invoiceArray.size();i++)
+        {
+            modelo = (InvoiceItemModel) invoiceArray.get(i);
+            totalInvoice = totalInvoice +modelo.getPriceT();
+        }
 
 
-
-        /*
-        invoiceArray = (ArrayList<InvoiceItemModel>) getIntent().getSerializableExtra("invoiceArray");
-        invoiceAdapter = new InvoiceAdapter(getApplicationContext(), invoiceArray);
-        invoiceBinding.rvInvoice.setHasFixedSize(true);
-        invoiceBinding.rvInvoice.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        invoiceBinding.rvInvoice.setAdapter(invoiceAdapter);
-           Log.d("------taggg-----", "onCreate: "+invoiceArray.get(0).getName());
-        Toast.makeText(this, invoiceArray.get(0).getName(), Toast.LENGTH_SHORT).show();
-
-        ArtistArrayAdapter adapter = new ArtistArrayAdapter(this, artists);
-        recyclerView = (RecyclerView) findViewById(R.id.cardList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        list.setLayoutManager(llm);
-        list.setAdapter( adapter );
-         */
-
+        invoiceBinding.tvTotal.setText("Total: "+totalInvoice);
     }
+
+
 }
